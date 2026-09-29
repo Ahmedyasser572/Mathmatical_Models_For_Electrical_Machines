@@ -1,0 +1,69 @@
+%implements s0_b0_oljkc_Outputs "C"
+
+%function Outputs(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+/* {S!d42}DiscretePulseGenerator: '<Root>/Pulse Generator' */
+/*@>1322*/Blink_led_EX_model_B./*@>14bf*/PulseGenerator/*@>10c*/ = ((/*@>134b*/Blink_led_EX_model_DW./*@>14ce*/clockTickCounter/*@>105*/ < /*@>e1f*/5000L)/*@>109*/ && (/*@>1351*/Blink_led_EX_model_DW./*@>14d1*/clockTickCounter/*@>108*/ >= /*@>e23*/0L));
+/* {S!d44}DiscretePulseGenerator: '<Root>/Pulse Generator' */
+/*@>d54*/if (/*@>1357*/Blink_led_EX_model_DW./*@>14d4*/clockTickCounter/*@>112*/ >= /*@>e28*/9999L) {
+    /*@>1369*/Blink_led_EX_model_DW./*@>14da*/clockTickCounter/*@>d57*/ = /*@>e31*/0L;
+} else {
+    /*@>135d*/Blink_led_EX_model_DW./*@>14d7*/clockTickCounter/*@>1492*/++;
+}
+/* {S!d46}Logic: '<Root>/NOT' */
+/*@>1328*/Blink_led_EX_model_B./*@>14c2*/NOT/*@>11e*/ = !/*@<11d*/(/*@>132e*/Blink_led_EX_model_B./*@>14c5*/PulseGenerator/*@>bab*/ != /*@>ba9*/0.0);
+/* {S!d48}S-Function (c280xgpio_do): '<Root>/Digital Output' */
+                                    
+{
+
+
+
+
+
+
+
+        if (/*@>14fd*/Blink_led_EX_model_B./*@>14fc*/NOT){
+            GpioDataRegs.GPASET.bit.GPIO31 = 1U;
+        }
+        else{
+            GpioDataRegs.GPACLEAR.bit.GPIO31 = 1U;
+        }
+
+}
+ 
+
+/* {S!d50}S-Function (c280xgpio_do): '<Root>/Digital Output1' */
+                                    
+{
+
+
+        if (/*@>1519*/Blink_led_EX_model_B./*@>1518*/PulseGenerator){
+            GpioDataRegs.GPBSET.bit.GPIO34 = 1U;
+        }
+        else{
+            GpioDataRegs.GPBCLEAR.bit.GPIO34 = 1U;
+        }
+
+
+
+
+
+
+}
+ 
+
+%<SLibInsertSolverResetCode()>\
+%closefile cfgTxt
+%<cfgTxt>
+%<LibSetSystemField(system, "CachedOutputLocalVars", localVarDecl)>
+%endfunction
+%function OutputsFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Outputs(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 0, fcnProtoType)>
+%endfunction

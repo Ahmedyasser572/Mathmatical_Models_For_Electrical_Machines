@@ -1,0 +1,47 @@
+%implements s0_b0_oljkc_ModelInitialize "C"
+
+%function ModelInitialize(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%<SLibInsertAsyncTaskInitializeCode(system)>
+%<SLibWriteMachineInitialize()>
+%<SLibCGIRDumpSystemUserCode(0, "Start", "Header")>\
+%<SLibCGIRDumpSystemUserCode(0, "Start", "Body")>\
+/* Start for DiscretePulseGenerator: '<Root>/Pulse Generator' */
+/*@>136f*/Blink_led_EX_model_DW./*@>1539*/clockTickCounter/*@>332*/ = /*@>e53*/0L;
+/* Start for S-Function (c280xgpio_do): '<Root>/Digital Output' */
+                        
+        
+        EALLOW;
+                GpioCtrlRegs.GPAMUX2.all &= 0x3FFFFFFFU;
+                GpioCtrlRegs.GPADIR.all |= 0x80000000U;
+        EDIS;
+
+
+
+
+/* Start for S-Function (c280xgpio_do): '<Root>/Digital Output1' */
+                        
+        
+        EALLOW;
+                GpioCtrlRegs.GPBMUX1.all &= 0xFFFFFFCFU;
+                GpioCtrlRegs.GPBDIR.all |= 0x4U;
+        EDIS;
+
+
+
+
+%<SLibCGIRDumpSystemUserCode(0, "Start", "Trailer")>\
+%<SLibInsertInitPeriodicCStatesFcn(system)>
+%closefile cfgTxt
+%<cfgTxt>
+%endfunction
+%function ModelInitializeFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void ModelInitialize(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 1, fcnProtoType)>
+%endfunction
